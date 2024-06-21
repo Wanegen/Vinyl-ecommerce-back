@@ -29,5 +29,17 @@ module EcommerceBackend
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    # config.middleware.insert_before 0, Rack::Cors do
+    #   allow do
+    #     origins '*' # Autorise tous les domaines. Remplace '*' par ton domaine spécifique si nécessaire.
+    #     resource '*', headers: :any, methods: [:get, :post, :put, :patch, :delete, :options, :head]
+    #   end
+    # end
+    config.middleware.insert_before ActionDispatch::Static, Rack::Cors do
+      allow do
+          origins '*'
+          resource '*', :headers => :any, :methods => [:get, :post, :options, :patch, :delete]
+      end
+    end
   end
 end
